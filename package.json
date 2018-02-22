@@ -13,8 +13,11 @@
     "dev-react": "webpack -d --watch"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "bluebird": "^3.5.1",
+    "mongoose": "^5.0.6",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "webpack": "^3.11.0"
@@ -31,8 +34,8 @@
     "regenerator-runtime": "^0.11.1"
   },
   "babel": {
-  "presets": [
-    "es2015"
-  ]
-}
+    "presets": [
+      "es2015"
+    ]
+  }
 }
