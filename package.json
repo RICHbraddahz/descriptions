@@ -1,17 +1,38 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
-  "author": "",
-  "license": "",
+  "name": "amenities",
+  "version": "1.0.0",
+  "description": "Boat description",
+  "author": "James Powers",
+  "license": "UNLICENSED",
   "engines": {
     "node": ">=6.13.0"
   },
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/index.js",
+    "dev-react": "webpack -d --watch"
   },
   "dependencies": {
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "webpack": "^3.11.0"
   },
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
-  }
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.4.0",
+    "eslint": "^4.18.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "jest": "^22.4.0",
+    "regenerator-runtime": "^0.11.1"
+  },
+  "babel": {
+  "presets": [
+    "es2015"
+  ]
+}
 }
