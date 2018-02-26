@@ -1,15 +1,23 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const promise = require('bluebird');
-const request = require('request-promise');
-const Repo = require('../database');
+let db = require('../database/');
 let app = express();
-let port = 3001;
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(__dirname + '/../client/dist'));
+app.use(bodyParser.json());
+app.use(cors());
 
+let port = 1129;
 
 
 app.listen(port, function() {
   console.log(`listening on port ${port}`);
+});
+
+app.get('/amenities/:id', function (req, res) {
+  let cb = function (data) {
+    res.send(data);
+  }
+  db.find(req.params.id, cb);
 });
