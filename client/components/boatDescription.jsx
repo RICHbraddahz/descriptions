@@ -2,7 +2,6 @@ import React from 'react';
 
 const BoatDescription = ({ shipDetails, user }) => (
   <div>
-
     <div
       className='boat-description'>
       {shipDetails.description}
