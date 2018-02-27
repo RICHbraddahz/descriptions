@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import BoatDescription from './boatDescription.jsx'
+import dummy from './../../mockData.js';
 
 class Description extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      boat:
+      boat: dummy[0];
     }
   }
 
