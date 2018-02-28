@@ -4,6 +4,7 @@ import description from './../components/description';
 import amenities from './../components/amenities';
 import sleepingArangement from './../components/sleepingArangement';
 import boatRules from './../components/boatRules';
+import sleepingArangementList from './../components/sleepingArangementList';
 
 test('should render boatDescription', () => {
     const wrapper = shallow(<div/>);

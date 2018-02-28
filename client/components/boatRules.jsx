@@ -1,7 +1,7 @@
 import React from 'react';
 import BoatRule from './boatRule.jsx';
 
-const BoatRules = ( {boatRules} ) => (
+const BoatRules = ({ boatRules }) => (
   <div className="boat-rules">
     <div>
       {
