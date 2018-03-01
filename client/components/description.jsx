@@ -22,7 +22,6 @@ class Description extends React.Component {
   }
 
   onClickReadMore(toggled) {
-    //pass in revealToggle.amenityHide (toggled)
     for (let key in revealToggle) {
       if (key === toggled) {
         revealToggle[key] = !revealToggle[key];
@@ -34,7 +33,7 @@ class Description extends React.Component {
   }
 
   render() {
-    return {
+    return (
       <div>
         <BoatDescription
           shipDetails={this.state.boat.shipDetails}
@@ -57,7 +56,7 @@ class Description extends React.Component {
           onClickReadMore={this.onClickReadMore}
         />
       </div>
-    }
+    );
   }
 }
 

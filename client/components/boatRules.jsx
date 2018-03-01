@@ -10,10 +10,10 @@ const BoatRules = ({ boatRules, revealToggle, onClickReadMore }) => (
             return (
               <div><BoatRule
                 boatRule={boatRule}
-              /></div>;
+              /></div>
             );
           }
-        });
+        })
       }
     </div>
     <div>

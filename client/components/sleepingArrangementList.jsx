@@ -1,22 +1,24 @@
 import React from 'react';
-import SleepingArangement from './sleepingArangement.jsx';
+import SleepingArrangement from './sleepingArrangement.jsx';
 
-const SleepingArangementList = ({ sleepingArangement }) => (
-  <div className="sleeping-arrangement-list">
-    Sleeping Arrangemnt
-    <div>
-      {
-        let bedroomCount = 0;
-        sleepingArangement.map(bedroom => {
-          bedroomCount++;
-          return <div><SleepingArangement
-            bedroom={bedroom}
-            bedroomCount={bedroomCount}
-          /></div>));
+const SleepingArrangementList = ({ sleepingArrangement }) => {
+  let bedroomCount = 0;
+  return (
+    <div className="sleeping-arrangement-list">
+      Sleeping Arrangemnt
+      <div>
+        {
+          sleepingArrangement.map(bedroom => {
+            bedroomCount++;
+            return (<div><SleepingArrangement
+              bedroom={bedroom}
+              bedroomCount={bedroomCount}
+            /></div>);
+          })
         }
-      }
+      </div>
     </div>
-  </div>
-)
+  );
+}
 
-export default SleepingArangementList;
+export default SleepingArrangementList;

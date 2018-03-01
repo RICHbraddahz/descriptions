@@ -16,7 +16,7 @@ const BoatDescription = ({ shipDetails, user }) => (
 
     <div
       className='boat-owner'>
-      <img src={props.user.thumbnail}>
+      <img src={props.user.thumbnail}/>
         {user.name}
     </div>
   </div>
