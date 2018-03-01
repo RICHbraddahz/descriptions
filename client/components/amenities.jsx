@@ -21,7 +21,7 @@ const OptionalAmenities = ({ optional, revealToggle }) => {
   );
 }
 
-const Amenities = ({ priority, optional, revealToggle }) => (
+const Amenities = ({ priority, optional, revealToggle, onClickReadMore }) => (
   <div className="amenities">
     <div className="priority">
       {
