@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import BoatDescription from './boatDescription.jsx';
-import Amenity from './amenity.jsx';
+import Amenities from './amenities.jsx';
 import SleepingArrangementList from './sleepingArrangementList.jsx';
 import BoatRules from './boatRules.jsx';
 import dummy from './../../mockData.js';
@@ -41,7 +41,7 @@ class Description extends React.Component {
           revealToggle={this.state.revealToggle.boatDescriptionHide}
           onClickReadMore={this.onClickReadMore}
         />
-        <Amenity
+      <Amenities
           priority={this.state.boat.shipDetails.amenities.priority}
           optional={this.state.boat.shipDetails.amenities.optional}
           revealToggle={this.state.revealToggle.amenityHide}

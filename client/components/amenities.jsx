@@ -15,35 +15,45 @@ const OptionalAmenities = ({ optional, revealToggle }) => {
               hasAmenity={optional[key]}
             /></div>
           }
-        });
+        })
       }
     </div>
   );
 }
 
-const Amenities = ({ priority, optional, revealToggle, onClickReadMore }) => (
-  <div className="amenities">
-    <div className="priority">
-      {
-        Object.keys(priority).map(key => (
-          <div><Amenity
-            amenity={key}
-            hasAmenity={priority[key]}
-          /></div>
-        ));
-      }
+const Amenities = ({ priority, optional, revealToggle, onClickReadMore }) => {
+  return (
+    <div className="amenities">
+      <div className="priority">
+        {
+          Object.keys(priority).map(key => {
+            return (
+              <div>
+                <Amenity
+                  amenity={key}
+                  hasAmenity={priority[key]}
+                />
+              </div>
+            );
+          })
+        }
+      </div>
+      <div>
+        <OptionalAmenities
+          className="optional"
+          optional={optional}
+          revealToggle={revealToggle}
+        />
+      </div>
+      <div>
+        <h5
+          className="read-more"
+          onClick={() => { onClickReadMore('amenityHide'); }}
+          >{!revealToggle ? 'Hide' : 'Read More'}
+        </h5>
+      </div>
     </div>
-    <div>
-      <OptionalAmenities
-        className="optional"
-        revealToggle={revealToggle}/>
-      <h5
-        className="read-more"
-        onClick={() => { this.onClickReadMore('amenityHide'); }}
-        >{revealToggle ? 'Hide' : 'Read More'}
-      </h5>
-    </div>
-  </div>
-)
+  );
+}
 
 export default Amenities;

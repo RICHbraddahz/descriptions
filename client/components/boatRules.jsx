@@ -35,7 +35,7 @@ const BoatRules = ({ boatRules, revealToggle, onClickReadMore }) => (
       <h5
         className="read-more"
         onClick={() => { onClickReadMore('boatRulesHide'); }}
-        >{revealToggle ? 'Hide' : 'Read More'}
+        >{!revealToggle ? 'Hide' : 'Read More'}
       </h5>
     </div>
   </div>
