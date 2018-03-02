@@ -3,6 +3,7 @@ import BoatRule from './boatRule.jsx';
 
 const BoatRules = ({ boatRules, revealToggle, onClickReadMore }) => (
   <div className="boat-rules">
+    Boat Rules
     <div>
       {
         boatRules.map(boatRule => {
@@ -19,8 +20,8 @@ const BoatRules = ({ boatRules, revealToggle, onClickReadMore }) => (
     <div>
       <h5
         className="read-more"
-        onClick={this.onClickReadMore('boatRulesHide')}
-        >{this.state.revealToggle ? 'Hide' : 'Read More'}
+        onClick={() => { this.onClickReadMore('boatRulesHide'); }}
+        >{revealToggle ? 'Hide' : 'Read More'}
       </h5>
     </div>
   </div>

@@ -10,11 +10,11 @@ class Description extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      boat: dummy[0],
+      boat: props.boat[0],
       revealToggle: {
         boatDescriptionHide: true,
         amenityHide: true,
-        boatRulesHide: true,
+        boatRulesHide: false,
       },
     }
 
@@ -48,7 +48,7 @@ class Description extends React.Component {
           onClickReadMore={this.onClickReadMore}
         />
         <SleepingArrangementList
-          sleepingArangement={this.state.boat.shipDetails.bedrooms.sleepingArangement}
+          sleepingArrangement={this.state.boat.shipDetails.bedrooms.sleepingArangement}
         />
       <BoatRules
           boatRules={this.state.boat.shipDetails.boatRules}

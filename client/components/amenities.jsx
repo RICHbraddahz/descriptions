@@ -39,8 +39,8 @@ const Amenities = ({ priority, optional, revealToggle, onClickReadMore }) => (
         revealToggle={revealToggle}/>
       <h5
         className="read-more"
-        onClick={this.onClickReadMore('amenityHide')}
-        >{this.state.revealToggle ? 'Hide' : 'Read More'}
+        onClick={() => { this.onClickReadMore('amenityHide'); }}
+        >{revealToggle ? 'Hide' : 'Read More'}
       </h5>
     </div>
   </div>
