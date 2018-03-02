@@ -14,7 +14,7 @@ class Description extends React.Component {
       revealToggle: {
         boatDescriptionHide: true,
         amenityHide: true,
-        boatRulesHide: false,
+        boatRulesHide: true,
       },
     }
 
@@ -22,13 +22,13 @@ class Description extends React.Component {
   }
 
   onClickReadMore(toggled) {
-    for (let key in revealToggle) {
+    for (let key in this.state.revealToggle) {
       if (key === toggled) {
-        revealToggle[key] = !revealToggle[key];
+        this.state.revealToggle[key] = !this.state.revealToggle[key];
       }
     }
-    setState({
-      revealToggle: revealToggle,
+    this.setState({
+      revealToggle: this.state.revealToggle,
     });
   }
 

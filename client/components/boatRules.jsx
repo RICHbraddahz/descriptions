@@ -1,26 +1,40 @@
 import React from 'react';
 import BoatRule from './boatRule.jsx';
+//props.onClickReadMore('boatRulesHide');
 
-const BoatRules = ({ boatRules, revealToggle, onClickReadMore }) => (
-  <div className="boat-rules">
-    Boat Rules
+const ShowMoreBoatRules = ({ boatRules, revealToggle }) => {
+  if (revealToggle) {
+    return (
+      <div>
+        <BoatRule boatRule={boatRules[0]}/>
+      </div>
+    );
+  }
+  return (
     <div>
       {
         boatRules.map(boatRule => {
-          if (boatRules[0] || revealToggle) {
             return (
-              <div><BoatRule
-                boatRule={boatRule}
-              /></div>
+              <div>
+                <BoatRule boatRule={boatRule}/>
+              </div>
             );
-          }
         })
       }
     </div>
+  );
+}
+const BoatRules = ({ boatRules, revealToggle, onClickReadMore }) => (
+  <div className="boat-rules">
+    Boat Rules
+    <ShowMoreBoatRules
+      boatRules={boatRules}
+      revealToggle={revealToggle}
+    />
     <div>
       <h5
         className="read-more"
-        onClick={() => { this.onClickReadMore('boatRulesHide'); }}
+        onClick={() => { onClickReadMore('boatRulesHide'); }}
         >{revealToggle ? 'Hide' : 'Read More'}
       </h5>
     </div>
