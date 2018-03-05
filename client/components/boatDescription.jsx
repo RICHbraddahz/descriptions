@@ -1,23 +1,27 @@
 import React from 'react';
+import './styles/boatDescription.scss';
 
 const BoatDescription = ({ shipDetails, user }) => (
-  <div>
+  <div className='boat-description'>
+    <div className='top-banner'>
+      <div className='boat'>
+        <h1><b>Boaty McBoatface</b></h1>
+        <h4>Home Town</h4>
+      </div>
+      <div className='owner'>
+        <div><img src={user.thumbnail}/></div>
+        <div>{user.name}</div>
+      </div>
+    </div>
     <div
-      className='boat-description'>
+      className='summary'>
+      <div>{shipDetails.capacity} guests</div>
+      <div>{shipDetails.heads} heads</div>
+      <div>{shipDetails.bedrooms.amount} bedrooms</div>
+    </div>
+    <div
+      className='description'>
       {shipDetails.description}
-    </div>
-
-    <div
-      className='boat-summary'>
-      <h1>{shipDetails.capacity} guests</h1>
-      <h1>{shipDetails.heads} heads</h1>
-      <h1>{shipDetails.bedrooms.bedrooms} bedrooms</h1>
-    </div>
-
-    <div
-      className='boat-owner'>
-      <img src={user.thumbnail}/>
-        {user.name}
     </div>
   </div>
 )

@@ -24,6 +24,7 @@ const OptionalAmenities = ({ optional, revealToggle }) => {
 const Amenities = ({ priority, optional, revealToggle, onClickReadMore }) => {
   return (
     <div className="amenities">
+      <h3><b>Amenities</b></h3>
       <div className="priority">
         {
           Object.keys(priority).map(key => {

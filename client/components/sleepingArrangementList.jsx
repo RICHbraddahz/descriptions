@@ -5,7 +5,7 @@ const SleepingArrangementList = ({ sleepingArrangement }) => {
   let bedroomCount = 0;
   return (
     <div className="sleeping-arrangement-list">
-      Sleeping Arrangemnt
+      <h3><b>Sleeping Arrangemnt</b></h3>
       <div>
         {
           sleepingArrangement.map(bedroom => {

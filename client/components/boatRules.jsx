@@ -26,7 +26,7 @@ const ShowMoreBoatRules = ({ boatRules, revealToggle }) => {
 }
 const BoatRules = ({ boatRules, revealToggle, onClickReadMore }) => (
   <div className="boat-rules">
-    Boat Rules
+    <h3><b>Boat Rules</b></h3>
     <ShowMoreBoatRules
       boatRules={boatRules}
       revealToggle={revealToggle}

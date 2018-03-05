@@ -1,0 +1,28 @@
+.boat-description {
+  .top-banner {
+    .boat {
+      float: left;
+      padding-right: 30px;
+    }
+    .owner {
+      float: left;
+    }
+    background: #fff;
+    padding-bottom: 10px;
+    border: 0;
+    display:inline-block;
+  }
+  .summary * {
+    background: #fff;
+    padding-right: 8px;
+    border: 0;
+    display:inline-block;
+  }
+  .summary {
+    padding-bottom: 20px;
+  }
+  .description {
+    padding-bottom: 10px;
+  }
+  border-bottom: solid;
+}
