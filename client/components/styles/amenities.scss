@@ -1,0 +1,19 @@
+.amenities {
+  .first {
+    float: left;
+    clear: both;
+    display: block;
+    position: relative;
+    padding-right: 30px;
+  }
+  .second {
+    float: left;
+  }
+  .read-more {
+    clear: both;
+    display: block;
+    position: relative;
+    color: #2cb5b4;
+  }
+  border-bottom: solid;
+}

@@ -1,19 +1,25 @@
 import React from 'react';
 import Amenity from './amenity.jsx';
+import './styles/amenities.scss';
 
-const OptionalAmenities = ({ optional, revealToggle }) => {
+const OptionalAmenities = ({ optional, revealToggle, col }) => {
   if(revealToggle) {
     return null;
   }
+  // let col = 'second';
   return (
     <div>
       {
         Object.keys(optional).map(key => {
           if (optional[key]) {
-            return <div><Amenity
-              amenity={key}
-              hasAmenity={optional[key]}
-            /></div>
+            col === 'first' ? col = 'second': col = 'first';
+            return (
+              <div
+                className={col}><Amenity
+                amenity={key}
+                hasAmenity={optional[key]}
+              /></div>
+            );
           }
         })
       }
@@ -22,14 +28,19 @@ const OptionalAmenities = ({ optional, revealToggle }) => {
 }
 
 const Amenities = ({ priority, optional, revealToggle, onClickReadMore }) => {
+  let col = 'second';
   return (
     <div className="amenities">
       <h3><b>Amenities</b></h3>
       <div className="priority">
         {
           Object.keys(priority).map(key => {
+            if (priority[key] === null) {
+              priority[key] = false;
+            }
+            col === 'first' ? col = 'second': col = 'first';
             return (
-              <div>
+              <div className={col}>
                 <Amenity
                   amenity={key}
                   hasAmenity={priority[key]}
@@ -38,13 +49,14 @@ const Amenities = ({ priority, optional, revealToggle, onClickReadMore }) => {
             );
           })
         }
-      </div>
-      <div>
         <OptionalAmenities
           className="optional"
           optional={optional}
           revealToggle={revealToggle}
-        />
+          col={col}
+          />
+      </div>
+      <div>
       </div>
       <div>
         <h5
