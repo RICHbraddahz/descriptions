@@ -1,11 +1,13 @@
 import React from 'react';
 import FaBed from 'react-icons/lib/fa/bed';
+import './styles/sleepingArrangement.scss';
 
-const SleepingArangement = ({ bedroom, bedroomCount }) => (
+const SleepingArrangement = ({ bedroom, bedroomCount }) => (
   <div className="sleeping-arrangement">
-    <h5><FaBed/> Bedroom {bedroomCount}</h5>
-    <h5>Sleeps {bedroom}</h5>
+    <div><FaBed/></div> 
+    <div>Bedroom {bedroomCount}</div>
+    <div>Sleeps {bedroom}</div>
   </div>
 )
 
-export default SleepingArangement;
+export default SleepingArrangement;

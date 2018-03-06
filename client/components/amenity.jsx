@@ -21,30 +21,30 @@ import TiWavesOutline from 'react-icons/lib/ti/waves-outline';
 
 const Amenities = ({ amenity, hasAmenity }) => {
   const signs = {
-    anchor: <FaAnchor/>,
-    engine: <FaRocket/>,
-    lifeJacket: <FaLifeBouy/>,
-    twoWayRadio: <GoRadioTower/>,
-    soundSystem: <MdMusicNote/>,
-    tv: <FaTelevision/>,
-    kitchen: <FaCutlery/>,
-    ac: <TiWeatherSnow/>,
-    heating: <TiWeatherSunny/>,
-    inflatables: <MdPool/>,
-    fishingGear: <MdBusinessCenter/>,
-    scubaGear: <TiWavesOutline/>,
-    harpoons: <TiBrush/>,
-    sharkCage: <FaAlignJustify/>,
-    medication: <MdBatteryStd/>,
-    wifi: <FaWifi/>,
-    pool: <MdHotTub/>,
+    anchor: [<FaAnchor/>, ' Anchor'],
+    engine: [<FaRocket/>, ' Engine'],
+    lifeJacket: [<FaLifeBouy/>, ' Life Jacket'],
+    twoWayRadio: [<GoRadioTower/>, ' Two Way Radio'],
+    soundSystem: [<MdMusicNote/>, ' Sound System'],
+    tv: [<FaTelevision/>, ' TV'],
+    kitchen: [<FaCutlery/>, ' Kitchen'],
+    ac: [<TiWeatherSnow/>, ' AC'],
+    heating: [<TiWeatherSunny/>, ' Heating'],
+    inflatables: [<MdPool/>, ' Inflatables'],
+    fishingGear: [<MdBusinessCenter/>, ' Fishing Gear'],
+    scubaGear: [<TiWavesOutline/>, ' Scuba Gear'],
+    harpoons: [<TiBrush/>, ' Harpoons'],
+    sharkCage: [<FaAlignJustify/>, ' Shark Cage'],
+    medication: [<MdBatteryStd/>, ' Medication'],
+    wifi: [<FaWifi/>, ' Wifi'],
+    pool: [<MdHotTub/>, ' Pool'],
   };
   return (
     <div className="amenity">
-      <h4 className={'' + hasAmenity}>
-        {signs[amenity]}
-        {' ' + amenity}
-      </h4>
+      <div className={'' + hasAmenity}>
+        {signs[amenity][0]}
+        {signs[amenity][1]}
+      </div>
     </div>
   );
 }

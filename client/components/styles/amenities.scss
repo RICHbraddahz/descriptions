@@ -1,4 +1,5 @@
 .amenities {
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
   .first {
     float: left;
     clear: both;
@@ -15,5 +16,11 @@
     position: relative;
     color: #2cb5b4;
   }
+  .read-more:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
   border-bottom: solid;
+  border-width: thin;
+  border-color: #cccccc;
 }
