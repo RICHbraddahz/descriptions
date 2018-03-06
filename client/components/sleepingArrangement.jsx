@@ -1,5 +1,4 @@
 import React from 'react';
-import './styles/sleepingArrangement.scss';
 import FaBed from 'react-icons/lib/fa/bed';
 
 const SleepingArangement = ({ bedroom, bedroomCount }) => (

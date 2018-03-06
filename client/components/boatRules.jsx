@@ -1,6 +1,8 @@
 import React from 'react';
 import BoatRule from './boatRule.jsx';
-//props.onClickReadMore('boatRulesHide');
+import './styles/boatRules.scss';
+import FaAngleDown from 'react-icons/lib/fa/angle-down';
+import FaAngleUp from 'react-icons/lib/fa/angle-up';
 
 const ShowMoreBoatRules = ({ boatRules, revealToggle }) => {
   if (revealToggle) {
@@ -24,21 +26,23 @@ const ShowMoreBoatRules = ({ boatRules, revealToggle }) => {
     </div>
   );
 }
-const BoatRules = ({ boatRules, revealToggle, onClickReadMore }) => (
-  <div className="boat-rules">
-    <h3><b>Boat Rules</b></h3>
-    <ShowMoreBoatRules
-      boatRules={boatRules}
-      revealToggle={revealToggle}
-    />
-    <div>
-      <h5
-        className="read-more"
-        onClick={() => { onClickReadMore('boatRulesHide'); }}
-        >{!revealToggle ? 'Hide' : 'Read More'}
-      </h5>
+const BoatRules = ({ boatRules, revealToggle, onClickReadMore }) => {
+  return (
+    <div className="boat-rules">
+      <h3><b>Boat Rules</b></h3>
+      <ShowMoreBoatRules
+        boatRules={boatRules}
+        revealToggle={revealToggle}
+      />
+      <div>
+        <h5
+          className="read-more"
+          onClick={() => { onClickReadMore('boatRulesHide'); }}
+          >{!revealToggle ? 'Hide': 'Read More'}
+        </h5>
+      </div>
     </div>
-  </div>
-)
+  );
+}
 
 export default BoatRules;
