@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/amenities');
 const data = require('../mockData.js');
+//mongod --port 27018
 
 let amenitiesSchema = mongoose.Schema({
   id: Number,
