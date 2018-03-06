@@ -6,29 +6,35 @@ import MdAirlineSeatLegroomNormal from 'react-icons/lib/md/airline-seat-legroom-
 
 
 
-const BoatDescription = ({ shipDetails, user }) => (
-  <div className='boat-description'>
-    <div className='top-banner'>
-      <div className='boat'>
-        <h1><b>Boaty McBoatface</b></h1>
-        <h4>Home Town</h4>
+const BoatDescription = ({ shipDetails, user }) => {
+  const capacity = shipDetails.capacity || 1;
+  const heads = shipDetails.heads || 0;
+  const amount = shipDetails.bedrooms.amount || 0;
+  
+  return (
+    <div className='boat-description'>
+      <div className='top-banner'>
+        <div className='boat'>
+          <h1><b>{shipDetails.name}</b></h1>
+          <h4>{shipDetails.dock}</h4>
+        </div>
+        <div className='owner'>
+          <div><img src={user.thumbnail}/></div>
+          <div>{user.name}</div>
+        </div>
       </div>
-      <div className='owner'>
-        <div><img src={user.thumbnail}/></div>
-        <div>{user.name}</div>
+      <div
+        className='summary'>
+        <div><FaGroup/>{capacity} guests</div>
+        <div><MdAirlineSeatLegroomNormal/>{heads} heads</div>
+        <div><FaBed/>{amount} bedrooms</div>
+      </div>
+      <div
+        className='description'>
+        {shipDetails.description}
       </div>
     </div>
-    <div
-      className='summary'>
-      <div><FaGroup/>{shipDetails.capacity} guests</div>
-      <div><MdAirlineSeatLegroomNormal/>{shipDetails.heads} heads</div>
-      <div><FaBed/>{shipDetails.bedrooms.amount} bedrooms</div>
-    </div>
-    <div
-      className='description'>
-      {shipDetails.description}
-    </div>
-  </div>
-)
+  );
+}
 
 export default BoatDescription;

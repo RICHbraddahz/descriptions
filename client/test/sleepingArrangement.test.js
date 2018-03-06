@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
-import sleepingArangement from './../components/sleepingArangement';
+import sleepingArrangement from './../components/sleepingArrangement';
 
 test('should render one <h5> components', () => {
   const wrapper = shallow(<div/>);

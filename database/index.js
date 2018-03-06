@@ -10,13 +10,15 @@ let amenitiesSchema = mongoose.Schema({
     link: String,
   },
   shipDetails: {
+    name: String,
+    dock: String,
     capacity: Number,
     boatRules: Array,
     heads: Number,
     description: String,
     bedrooms: {
-      bedrooms: Number,
-      sleepingArangement: Array,
+      capacity: Number,
+      sleepingArrangement: Array,
     },
     amenities: {
       priority: {

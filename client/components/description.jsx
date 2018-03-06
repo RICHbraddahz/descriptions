@@ -48,7 +48,7 @@ class Description extends React.Component {
           onClickReadMore={this.onClickReadMore}
         />
         <SleepingArrangementList
-          sleepingArrangement={this.state.boat.shipDetails.bedrooms.sleepingArangement}
+          sleepingArrangement={this.state.boat.shipDetails.bedrooms.sleepingArrangement}
         />
       <BoatRules
           boatRules={this.state.boat.shipDetails.boatRules}
