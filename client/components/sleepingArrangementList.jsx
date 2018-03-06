@@ -1,5 +1,6 @@
 import React from 'react';
 import SleepingArrangement from './sleepingArrangement.jsx';
+import './styles/sleepingArrangementList.scss';
 
 const SleepingArrangementList = ({ sleepingArrangement }) => {
   let bedroomCount = 0;
@@ -10,12 +11,16 @@ const SleepingArrangementList = ({ sleepingArrangement }) => {
         {
           sleepingArrangement.map(bedroom => {
             bedroomCount++;
-            return (<div><SleepingArrangement
-              bedroom={bedroom}
-              bedroomCount={bedroomCount}
-            /></div>);
+            return (
+              <div className="sleeping-box"><SleepingArrangement
+                bedroom={bedroom}
+                bedroomCount={bedroomCount}
+              /></div>
+            );
           })
         }
+        <div className="float-ender">
+        </div>
       </div>
     </div>
   );
