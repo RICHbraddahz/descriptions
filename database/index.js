@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/amenities');
+// mongoose.connect('mongodb://localhost/amenities');
 const data = require('../mockData.js');
 //mongod --port 27018
 
