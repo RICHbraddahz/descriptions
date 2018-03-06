@@ -1,12 +1,12 @@
 const express = require('express');
 let db = require('../database/');
 const mongoose = require('mongoose');
-const amenities = require ('../database/models/amenities.js');
+const amenities = require ('../database/models/amenities');
 
 const app = express();
 const port = 1129;
 
-app.use(express.static(__dirname + '/../client/dist'));
+app.use(express.static(__dirname + '/../client'));
 
 
 mongoose.connect('mongodb://localhost/amenities');

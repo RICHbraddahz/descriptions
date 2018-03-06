@@ -49,8 +49,8 @@ let amenitiesSchema = mongoose.Schema({
 let Amenities = mongoose.model('Amenities', amenitiesSchema);
 
 
-function insertData(products) {
-  return Amenities.insertMany(products);
+function insertData(amenities) {
+  return Amenities.insertMany(amenities);
 }
 
 function getAllProducts() {

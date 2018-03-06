@@ -13,4 +13,4 @@ Amenities.insertData(data)
   .catch((e) => {
     console.error(e);
     mongoose.disconnect();
-  });
+  }); 
