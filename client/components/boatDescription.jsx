@@ -1,5 +1,10 @@
 import React from 'react';
 import './styles/boatDescription.scss';
+import FaBed from 'react-icons/lib/fa/bed';
+import FaGroup from 'react-icons/lib/fa/group';
+import MdAirlineSeatLegroomNormal from 'react-icons/lib/md/airline-seat-legroom-normal';
+
+
 
 const BoatDescription = ({ shipDetails, user }) => (
   <div className='boat-description'>
@@ -15,9 +20,9 @@ const BoatDescription = ({ shipDetails, user }) => (
     </div>
     <div
       className='summary'>
-      <div>{shipDetails.capacity} guests</div>
-      <div>{shipDetails.heads} heads</div>
-      <div>{shipDetails.bedrooms.amount} bedrooms</div>
+      <div><FaGroup/>{shipDetails.capacity} guests</div>
+      <div><MdAirlineSeatLegroomNormal/>{shipDetails.heads} heads</div>
+      <div><FaBed/>{shipDetails.bedrooms.amount} bedrooms</div>
     </div>
     <div
       className='description'>
