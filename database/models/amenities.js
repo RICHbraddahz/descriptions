@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+// mongoose.
+const Promise = require('bluebird');
 //mongod --port 27018
 
 let amenitiesSchema = mongoose.Schema({

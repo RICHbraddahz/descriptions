@@ -1,5 +1,4 @@
 const express = require('express');
-const db = require('../database/');
 const mongoose = require('mongoose');
 const Amenities = require ('../database/models/amenities');
 

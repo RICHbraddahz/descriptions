@@ -10,7 +10,7 @@ class Description extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      boat: dummy[0],
+      boat: props.boat,
       revealToggle: {
         boatDescriptionHide: true,
         amenityHide: true,

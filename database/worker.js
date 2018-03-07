@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const Amenities = require('./models/amenities');
 const data = require('./mockData');
+const db = mongoose.connection;
 //mongod --port 27018
 
-mongoose.connect('mongodb://localhost/amenities', 27018);
+mongoose.connect('mongodb://localhost/amenities');
 
 Amenities.insertData(data)
   .then(() => {
