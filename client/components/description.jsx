@@ -10,7 +10,6 @@ class Description extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      boat: props.boat,
       revealToggle: {
         boatDescriptionHide: true,
         amenityHide: true,
@@ -36,22 +35,22 @@ class Description extends React.Component {
     return (
       <div>
         <BoatDescription
-          shipDetails={this.state.boat.shipDetails}
-          user={this.state.boat.user}
+          shipDetails={this.props.boat.shipDetails}
+          user={this.props.boat.user}
           revealToggle={this.state.revealToggle.boatDescriptionHide}
           onClickReadMore={this.onClickReadMore}
         />
       <Amenities
-          priority={this.state.boat.shipDetails.amenities.priority}
-          optional={this.state.boat.shipDetails.amenities.optional}
+          priority={this.props.boat.shipDetails.amenities.priority}
+          optional={this.props.boat.shipDetails.amenities.optional}
           revealToggle={this.state.revealToggle.amenityHide}
           onClickReadMore={this.onClickReadMore}
         />
         <SleepingArrangementList
-          sleepingArrangement={this.state.boat.shipDetails.bedrooms.sleepingArrangement}
+          sleepingArrangement={this.props.boat.shipDetails.bedrooms.sleepingArrangement}
         />
       <BoatRules
-          boatRules={this.state.boat.shipDetails.boatRules}
+          boatRules={this.props.boat.shipDetails.boatRules}
           revealToggle={this.state.revealToggle.boatRulesHide}
           onClickReadMore={this.onClickReadMore}
         />

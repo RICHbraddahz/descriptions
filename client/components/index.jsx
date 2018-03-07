@@ -1,33 +1,41 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Promise from 'bluebird';
 import Description from './description';
 import axios from 'axios';
+import dummy from '../../mockData.js';
 
-const getAmenityId = (path) => {
-  const parts = path.split('/');
-  if (parts[1] === 'amenities') {
-    const id = parseInt(parts[2], 10);
-    if (typeof id === 'number' && id >= 0 && id < 200) {
-      return id;
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data : dummy[0],
     }
   }
-  return null;
-};
-
-function renderAmenities(amenities) {
-  const url = `/amenities/${amenities}`;
-  axios.get(url)
-    .then(({ data }) => {
-      ReactDOM.render(
-        <Description boat={data} />,
-        document.getElementById('app'),
-      );
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  componentDidMount() {
+    //console.log(window.location.pathname)
+    if (window.location.pathname !== '/') {
+    this.fetchInfo();
+    }
+  }
+  fetchInfo () {
+      let id = parseInt(window.location.pathname.split('/')[2], 10);
+      console.log(id)
+      let context = this;
+      return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:3001/amenities/${id}/amenities`)
+          .then(({ data }) => this.setState({ data: data }))
+          .then(()=> resolve())
+          .catch((error) => {
+            console.log('error', error)
+          });
+      });
+    }
+  render () {
+    return (
+      <Description boat={this.state.data}/>
+    )
+  }
 }
 
-const amenityId = getAmenityId(window.location.pathname) ||
-                  Math.floor(Math.random() * 200);
-renderAmenities(amenityId);
+ReactDOM.render(<App/>, document.getElementById('app'));
