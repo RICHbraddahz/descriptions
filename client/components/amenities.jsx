@@ -6,7 +6,6 @@ const OptionalAmenities = ({ optional, revealToggle, col }) => {
   if(revealToggle) {
     return null;
   }
-  // let col = 'second';
   return (
     <div>
       {

@@ -13,14 +13,12 @@ class App extends React.Component {
     }
   }
   componentDidMount() {
-    //console.log(window.location.pathname)
     if (window.location.pathname !== '/') {
     this.fetchInfo();
     }
   }
   fetchInfo () {
       let id = parseInt(window.location.pathname.split('/')[2], 10);
-      console.log(id)
       let context = this;
       return new Promise((resolve, reject) => {
         axios.get(`http://localhost:3001/amenities/${id}/amenities`)

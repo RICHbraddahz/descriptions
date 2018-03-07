@@ -4,7 +4,6 @@ import BoatDescription from './boatDescription.jsx';
 import Amenities from './amenities.jsx';
 import SleepingArrangementList from './sleepingArrangementList.jsx';
 import BoatRules from './boatRules.jsx';
-import dummy from './../../mockData.js';
 
 class Description extends React.Component {
   constructor(props) {
