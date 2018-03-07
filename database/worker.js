@@ -3,7 +3,7 @@ const Amenities = require('./models/amenities');
 const data = require('./mockData');
 //mongod --port 27018
 
-mongoose.connect('mongodb://localhost/amenities');
+mongoose.connect('mongodb://localhost/amenities', 27018);
 
 Amenities.insertData(data)
   .then(() => {
@@ -13,4 +13,4 @@ Amenities.insertData(data)
   .catch((e) => {
     console.error(e);
     mongoose.disconnect();
-  }); 
+  });

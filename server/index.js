@@ -1,20 +1,19 @@
 const express = require('express');
-let db = require('../database/');
+const db = require('../database/');
 const mongoose = require('mongoose');
-const amenities = require ('../database/models/amenities');
+const Amenities = require ('../database/models/amenities');
 
 const app = express();
 const port = 3001;
 
-app.use(express.static(__dirname + '/../client'));
-
-
 mongoose.connect('mongodb://localhost/amenities');
+
+app.use(express.static(__dirname + '/../client'));
 
 app.get('/amenities/:id', (req, res) => {
   console.log('Serving GET request on url /amenities');
   const { id } = req.params;
-  amenities.getProductById(id)
+  Amenities.getAmenityById(id)
     .then(result => res.json(result));
 });
 
