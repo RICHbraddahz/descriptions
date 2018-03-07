@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const amenities = require ('../database/models/amenities');
 
 const app = express();
-const port = 1129;
+const port = 3001;
 
 app.use(express.static(__dirname + '/../client'));
 
