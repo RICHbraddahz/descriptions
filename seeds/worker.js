@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Amenities = require('./models/amenities');
+const Amenities = require('../database/models/amenities');
 const data = require('./mockData');
 
 mongoose.connect('mongodb://localhost/amenities');

@@ -10,7 +10,7 @@ mongoose.connect('mongodb://localhost/amenities');
 app.use('/amenities/:id', express.static(__dirname + '/../client'));
 app.use(express.static(__dirname + '/../client'));
 
-app.get('/amenities/:id/amenities', (req, res) => {
+app.get('/amenities/:id/amenities/', (req, res) => {
   console.log('Serving GET request on url /amenities');
   const { id } = req.params;
   Amenities.getAmenityById(id)
