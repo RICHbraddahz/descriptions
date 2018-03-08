@@ -1,5 +1,9 @@
 .amenities {
   font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+  .title {
+    font-size: 30;
+    font-weight: bold;
+  }
   .first {
     float: left;
     clear: both;

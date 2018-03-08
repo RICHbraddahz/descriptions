@@ -30,7 +30,7 @@ const Amenities = ({ priority, optional, revealToggle, onClickReadMore }) => {
   let col = 'second';
   return (
     <div className="amenities">
-      <h3><b>Amenities</b></h3>
+      <h3><b className="title">Amenities</b></h3>
       <div className="priority">
         {
           Object.keys(priority).map(key => {

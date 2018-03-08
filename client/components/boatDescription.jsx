@@ -10,12 +10,12 @@ const BoatDescription = ({ shipDetails, user }) => {
   const capacity = shipDetails.capacity || 1;
   const heads = shipDetails.heads || 0;
   const amount = shipDetails.bedrooms.amount || 0;
-  
+
   return (
     <div className='boat-description'>
       <div className='top-banner'>
         <div className='boat'>
-          <h1><b>{shipDetails.name}</b></h1>
+          <h1><b className='title'>{shipDetails.name}</b></h1>
           <h4>{shipDetails.dock}</h4>
         </div>
         <div className='owner'>

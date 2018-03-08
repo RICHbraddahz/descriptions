@@ -29,7 +29,7 @@ const ShowMoreBoatRules = ({ boatRules, revealToggle }) => {
 const BoatRules = ({ boatRules, revealToggle, onClickReadMore }) => {
   return (
     <div className="boat-rules">
-      <h3><b>Boat Rules</b></h3>
+      <h3><b className="title">Boat Rules</b></h3>
       <ShowMoreBoatRules
         boatRules={boatRules}
         revealToggle={revealToggle}
