@@ -4,7 +4,7 @@ WORKDIR /amenities
 
 RUN mkdir -p /amenities
 
-COPY . /amenities
+COPY ./amenities
 
 RUN npm install
 
