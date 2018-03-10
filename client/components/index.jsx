@@ -18,7 +18,6 @@ class App extends React.Component {
     // }
   }
   fetchInfo () {
-      console.log(this.props.id)
       let id = this.props.id || parseInt(window.location.pathname.split('/')[2], 10);
       return new Promise((resolve, reject) => {
         axios.get(`http://localhost:3001/amenities/${id}/amenities`)

@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  overview:
+    build: ./
+    depends_on:
+      - 'database'
+    ports:
+      - 3001:3001
+    volumes:
+      - .:/overview
+
+  database:
+    image: mongo
