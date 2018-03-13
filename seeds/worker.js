@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Amenities = require('../database/models/amenities');
 const data = require('./mockData');
 
-mongoose.connect('mongodb://database/amenities');
+mongoose.connect('mongodb://localhost:3001/amenities');
 
 Amenities.insertData(data)
   .then(() => {

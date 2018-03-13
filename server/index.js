@@ -6,7 +6,7 @@ const cors = require('cors');
 const app = express();
 const port = 3001;
 
-mongoose.connect('mongodb://database/amenities');
+mongoose.connect('mongodb://localhost/amenities');
 app.use(cors());
 app.use('/amenities/:id', express.static(__dirname + '/../client'));
 app.use(express.static(__dirname + '/../client'));
