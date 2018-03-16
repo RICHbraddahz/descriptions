@@ -11,7 +11,8 @@ const arrayOfStrings = (count) => {
   return strings;
 };
 
-const makeOneDescription = () => ({
+const makeOneDescription = id => ({
+  id,
   user: {
     name: casual.full_name,
     thumbnail: '#', // todo: replace with image url
@@ -54,28 +55,33 @@ const makeOneDescription = () => ({
   },
 });
 
-const batchInsertDescriptions = (client, collection, count) => {
+const batchInsertDescriptions = (client, collection, startingValue, count) => {
   let descriptions = [];
   for (let i = 0; i < count; i += 1) {
-    descriptions.push(makeOneDescription());
+    descriptions.push(makeOneDescription(startingValue + i));
   }
 
   return Descriptions.insertData(collection, descriptions)
     .catch((e) => {
       console.error(e);
-      client.disconnect();
+      client.close();
     });
 };
 
-const insert10MDescriptions = async (client, collection, batchSize, printEvery, startTime) => {
-  for (let j = 0; j < 10000000 / printEvery; j += 1) {
+const insertAllDescriptions = async (
+  client, collection,
+  startingValue, count, batchSize,
+  printEvery, startTime, label
+) => {
+  for (let j = 0; j < count / printEvery; j += 1) {
     for (let i = 0; i < printEvery / batchSize; i += 1) {
-      await batchInsertDescriptions(client, collection, batchSize);
+      await batchInsertDescriptions(client, collection, startingValue, batchSize);
     }
     let inserted = (j + 1) * printEvery;
     let timeDifference = dateMath.diff(startTime, new Date(), 'seconds', true);
-    console.log(`| Inserted ${inserted} descriptions (${Math.floor(inserted / timeDifference)} inserts/sec)`);
+
+    console.log(`${label}| Inserted ${inserted} descriptions (${Math.floor(inserted / timeDifference)} inserts/sec)`);
   }
 };
 
-module.exports = { insert10MDescriptions };
+module.exports = { insertAllDescriptions };
