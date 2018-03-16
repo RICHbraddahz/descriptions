@@ -71,7 +71,7 @@ const batchInsertDescriptions = (client, collection, startingValue, count) => {
 const insertAllDescriptions = async (
   client, collection,
   startingValue, count, batchSize,
-  printEvery, startTime, label
+  printEvery, startTime, tick
 ) => {
   for (let j = 0; j < count / printEvery; j += 1) {
     for (let i = 0; i < printEvery / batchSize; i += 1) {
@@ -79,8 +79,8 @@ const insertAllDescriptions = async (
     }
     let inserted = (j + 1) * printEvery;
     let timeDifference = dateMath.diff(startTime, new Date(), 'seconds', true);
-
-    console.log(`${label}| Inserted ${inserted} descriptions (${Math.floor(inserted / timeDifference)} inserts/sec)`);
+    let insertsPerSec = Math.floor(inserted / timeDifference);
+    tick(inserted, insertsPerSec);
   }
 };
 
