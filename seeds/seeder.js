@@ -78,7 +78,7 @@ MongoClient.connect(`${url}/${dbName}`)
           bars.forEach(bar => bar.update(100));
           let endTime = new Date();
           console.log('+ -----------------------');
-          console.log('| Completed seed.');
+          console.log(`| Completed seed.\n${seedCount} items inserted to ${url}/${dbName}`);
           console.log(`| Start time: ${startTime}`);
           console.log(`| End time: ${endTime}`);
           console.log(`| Elapsed time: ${dateMath.diff(startTime, endTime, 'seconds', true)} seconds`);
