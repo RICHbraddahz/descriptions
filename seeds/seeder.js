@@ -65,12 +65,10 @@ MongoClient.connect(`${url}/${dbName}`)
 
       workers.forEach((worker) => {
         worker.on('message', (msg) => {
-          let params = msg.split(',');
-          bars[params[0]].tick({
-            inserted: params[1],
-            ips: params[2]
-          });
-          if (JSON.parse(params[3])) {
+          let [barId, inserted, ips, finished] = msg.split(',');
+          bars[barId].tick({ inserted, ips });
+
+          if (JSON.parse(finished)) {
             finishedProcesses += 1;
             if (finishedProcesses === numCPUs) {
               printFinish(client, url, dbName, startTime);
