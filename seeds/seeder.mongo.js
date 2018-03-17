@@ -4,13 +4,16 @@ const { MongoClient } = require('mongodb');
 const cluster = require('cluster');
 const { range } = require('lodash');
 const cpus = require('os').cpus();
-const { insertAllDescriptions } = require('./seedFunctions.mongo');
+const { seedAllDescriptions } = require('./seedFunctions.mongo');
 
 let numCPUs = (process.env.numCPUs) ? parseInt(process.env.numCPUs, 10) : cpus.length;
 let startingValue = process.env.startingValue || 0;
 let seedCount = (process.env.seedCount || 10000000) / numCPUs;
 let batchSize = process.env.batchSize || 1000;
 let printEvery = process.env.printEvery || 10000;
+
+const url = process.env.url || 'mongodb://localhost:27017';
+const dbName = process.env.dbname || 'descriptions';
 
 const workers = [];
 let finishedProcesses = 0;
@@ -25,11 +28,11 @@ if (cluster.isMaster) {
   cluster.on('exit', () => {});
 }
 
-let printFinish = (client, url, dbName, startTime) => {
+let printFinish = (client, dbUrl, databaseName, startTime) => {
   let endTime = new Date();
   console.log('+ -----------------------');
   console.log('| Completed seed.');
-  console.log(`| Inserted ${seedCount} items to ${url}/${dbName}`);
+  console.log(`| Inserted ${seedCount} items to ${dbUrl}/${databaseName}`);
   console.log(`| Start time: ${startTime}`);
   console.log(`| End time: ${endTime}`);
   console.log(`| Elapsed time: ${dateMath.diff(startTime, endTime, 'seconds', true)} seconds`);
@@ -38,12 +41,6 @@ let printFinish = (client, url, dbName, startTime) => {
   client.close();
   process.exit();
 };
-
-// Connection URL
-const url = 'mongodb://localhost:27017';
-
-// Database Name
-const dbName = 'descriptions';
 
 // Use connect method to connect to the server
 MongoClient.connect(`${url}/${dbName}`)
@@ -55,6 +52,7 @@ MongoClient.connect(`${url}/${dbName}`)
     if (cluster.isMaster) {
       console.log('/* -----------------------');
       console.log('| Starting seed.');
+      console.log(`| Inserting ${seedCount} items to ${url}/${dbName}`);
       console.log(`| Start time: ${startTime}`);
       console.log('+ ------------------------');
 
@@ -87,10 +85,10 @@ MongoClient.connect(`${url}/${dbName}`)
       process.send(`${process.env.barId},${inserted},${insertsPerSec},${finished}`);
     };
 
-    const db = client.db('descriptions');
-    const collection = db.collection('descriptions');
+    const db = client.db(dbName);
+    const collection = db.collection(dbName);
 
-    insertAllDescriptions(
+    seedAllDescriptions(
       client, collection,
       startingValue, seedCount, batchSize,
       printEvery, startTime, tickFn
