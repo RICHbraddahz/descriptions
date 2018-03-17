@@ -4,7 +4,7 @@ const { MongoClient } = require('mongodb');
 const cluster = require('cluster');
 const { range } = require('lodash');
 const cpus = require('os').cpus();
-const { insertAllDescriptions } = require('./seedFunctions');
+const { insertAllDescriptions } = require('./seedFunctions.mongo');
 
 let numCPUs = (process.env.numCPUs) ? parseInt(process.env.numCPUs, 10) : cpus.length;
 let startingValue = process.env.startingValue || 0;
