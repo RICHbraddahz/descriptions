@@ -80,7 +80,7 @@ const insertAllDescriptions = async (
     let inserted = (j + 1) * printEvery;
     let timeDifference = dateMath.diff(startTime, new Date(), 'seconds', true);
     let insertsPerSec = Math.floor(inserted / timeDifference);
-    tick(inserted, insertsPerSec);
+    tick(inserted, insertsPerSec, inserted >= count);
   }
 };
 
