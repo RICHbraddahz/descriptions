@@ -1,22 +1,21 @@
-const dateMath = require('date-arithmetic');
-const ProgressBar = require('ascii-progress');
 const { MongoClient } = require('mongodb');
 const cluster = require('cluster');
-const { range } = require('lodash');
 const cpus = require('os').cpus();
 const { seedAllDescriptions } = require('./seedFunctions.mongo');
+const { printStart, printFinish, makeBars } = require('./seedLogging');
 
 let numCPUs = (process.env.numCPUs) ? parseInt(process.env.numCPUs, 10) : cpus.length;
-let startingValue = process.env.startingValue || 0;
-let seedCount = (process.env.seedCount || 10000000) / numCPUs;
-let batchSize = process.env.batchSize || 1000;
-let printEvery = process.env.printEvery || 10000;
+let startingValue = process.env.startingValue ? parseInt(process.env.startingValue, 10) : 0;
+let seedCount = (process.env.seedCount ? parseInt(process.env.seedCount, 10) : 10000000) / numCPUs;
+let batchSize = process.env.batchSize ? parseInt(process.env.batchSize, 10) : 1000;
+let printEvery = process.env.printEvery ? parseInt(process.env.printEvery, 10) : 10000;
 
 const url = process.env.url || 'mongodb://localhost:27017';
 const dbName = process.env.dbname || 'descriptions';
 
 const workers = [];
 let finishedProcesses = 0;
+
 if (cluster.isMaster) {
   for (let i = 0; i < (numCPUs - 1); i += 1) {
     workers.push(cluster.fork({
@@ -24,84 +23,60 @@ if (cluster.isMaster) {
       barId: i + 1
     }));
   }
-
-  cluster.on('exit', () => {});
 }
 
-let printFinish = (client, dbUrl, databaseName, startTime) => {
-  let endTime = new Date();
-  console.log('+ -----------------------');
-  console.log('| Completed seed.');
-  console.log(`| Inserted ${seedCount} items to ${dbUrl}/${databaseName}`);
-  console.log(`| Start time: ${startTime}`);
-  console.log(`| End time: ${endTime}`);
-  console.log(`| Elapsed time: ${dateMath.diff(startTime, endTime, 'seconds', true)} seconds`);
-  console.log('\\* ----------------\\rm/--');
+let seedDatabase = async () => {
+  const client = await MongoClient.connect(`${url}/${dbName}`);
+  const db = client.db(dbName);
+  const collection = db.collection(dbName);
 
-  client.close();
-  process.exit();
-};
+  let startTime = new Date();
+  let bars = [];
 
-// Use connect method to connect to the server
-MongoClient.connect(`${url}/${dbName}`)
-  .then((client) => {
-    let startTime = new Date();
-
-    let bars = [];
-
-    if (cluster.isMaster) {
-      console.log('/* -----------------------');
-      console.log('| Starting seed.');
-      console.log(`| Inserting ${seedCount} items to ${url}/${dbName}`);
-      console.log(`| Start time: ${startTime}`);
-      console.log('+ ------------------------');
-
-      bars = range(numCPUs).map(id => new ProgressBar({
-        schema: `| ${id} [:bar] :percent :inserted inserted (:ips inserts/sec)`,
-        total: seedCount / printEvery
-      }));
-
-      workers.forEach((worker) => {
-        worker.on('message', (msg) => {
-          let [barId, inserted, ips, finished] = msg.split(',');
-          bars[barId].tick({ inserted, ips });
-
-          if (JSON.parse(finished)) {
-            finishedProcesses += 1;
-            if (finishedProcesses === numCPUs) {
-              printFinish(client, url, dbName, startTime);
-            }
-          }
-        });
-      });
+  let handleFinish = async () => {
+    finishedProcesses += 1;
+    if (finishedProcesses === numCPUs) {
+      await collection.createIndex({ id: 1 });
+      console.log('| Set id as index');
+      printFinish(client, collection, url, dbName, startTime);
+      client.close();
+      process.exit();
     }
+  };
 
-    let tickFn = (cluster.isMaster) ? (inserted, ips) => {
-      bars[0].tick({
-        inserted,
-        ips
-      });
-    } : (inserted, insertsPerSec, finished) => {
-      process.send(`${process.env.barId},${inserted},${insertsPerSec},${finished}`);
-    };
+  if (cluster.isMaster) {
+    printStart(url, dbName, startTime, seedCount);
+    bars = makeBars(numCPUs, seedCount, printEvery);
 
-    const db = client.db(dbName);
-    const collection = db.collection(dbName);
+    workers.forEach((worker) => {
+      worker.on('message', (msg) => {
+        let [barId, inserted, ips, finished] = msg.split(',');
+        bars[barId].tick({ inserted, ips });
 
-    seedAllDescriptions(
-      client, collection,
-      startingValue, seedCount, batchSize,
-      printEvery, startTime, tickFn
-    )
-      .then(() => {
-        if (cluster.isMaster) {
-          finishedProcesses += 1;
-          if (finishedProcesses === numCPUs) {
-            printFinish(client, url, dbName, startTime);
-          }
+        if (JSON.parse(finished)) {
+          handleFinish();
         }
       });
-  })
+    });
+  }
+
+  const tick = (cluster.isMaster) ? (inserted, ips) => {
+    bars[0].tick({ inserted, ips });
+  } : (inserted, ips, finished) => {
+    process.send(`${process.env.barId},${inserted},${ips},${finished}`);
+  };
+
+  await seedAllDescriptions(
+    client, collection,
+    startingValue, seedCount, batchSize,
+    printEvery, startTime, tick
+  );
+  if (cluster.isMaster) {
+    handleFinish();
+  }
+};
+
+seedDatabase()
   .catch((e) => {
-    console.error(e);
+    console.log(e);
   });
