@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
 const dateMath = require('date-arithmetic');
 const casual = require('casual');
-const Descriptions = require('../database/models/descriptionModel');
+const Descriptions = require('../database/models/descriptionModel.mongo');
 
 const capitalLetters = [...Array(26)].map((val, i) => String.fromCharCode(i + 65));
 const boatName = () => capitalLetters[casual.integer(0, 26)] + casual.integer(1, 200);
@@ -78,7 +78,10 @@ const seedAllDescriptions = async (
 ) => {
   for (let j = 0; j < count / printEvery; j += 1) {
     for (let i = 0; i < printEvery / batchSize; i += 1) {
-      await seedDescriptionBatch(client, collection, startingValue, batchSize);
+      await seedDescriptionBatch(
+        client, collection,
+        (startingValue + i + ((j * printEvery) / batchSize)), batchSize
+      );
     }
     let inserted = (j + 1) * printEvery;
     let timeDifference = dateMath.diff(startTime, new Date(), 'seconds', true);
