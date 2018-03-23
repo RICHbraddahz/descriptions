@@ -9,10 +9,12 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "npm run seed-db & webpack & node server/index.js ",
+    "start": "webpack & node server/index.js ",
     "dev-react": "webpack -d --watch",
     "seed-mongodb": "node seeds/seeder.mongo.js",
-    "seed-postgres": "node seeds/seeder.postgres.js"
+    "seed-postgres": "node seeds/seeder.postgres.js",
+    "benchmark-mongodb": "node benchmarking/benchmarker.mongo.js",
+    "benchmark-postgres": "node benchmarking/benchmarker.postgres.js"
   },
   "dependencies": {
     "ascii-progress": "^1.0.5",
@@ -26,6 +28,7 @@
     "express": "^4.16.2",
     "lodash": "^4.17.5",
     "mongodb": "^3.0.4",
+    "newrelic": "^3.2.0",
     "pg-promise": "^8.2.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
