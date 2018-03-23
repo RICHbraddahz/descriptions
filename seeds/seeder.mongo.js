@@ -11,7 +11,7 @@ let batchSize = process.env.batchSize ? parseInt(process.env.batchSize, 10) : 10
 let printEvery = process.env.printEvery ? parseInt(process.env.printEvery, 10) : 10000;
 
 const url = process.env.url || 'mongodb://localhost:27017';
-const dbName = process.env.dbname || 'descriptions';
+const dbName = process.env.dbname || 'descriptions_n';
 
 const workers = [];
 let finishedProcesses = 0;
@@ -36,16 +36,16 @@ let seedDatabase = async () => {
   let handleFinish = async () => {
     finishedProcesses += 1;
     if (finishedProcesses === numCPUs) {
+      console.log('| Setting id as index...');
       await collection.createIndex({ id: 1 });
-      console.log('| Set id as index');
-      printFinish(client, collection, url, dbName, startTime);
+      printFinish(url, dbName, startTime, seedCount);
       client.close();
       process.exit();
     }
   };
 
   if (cluster.isMaster) {
-    printStart(url, dbName, startTime, seedCount);
+    printStart(url, dbName, startTime, seedCount * numCPUs);
     bars = makeBars(numCPUs, seedCount, printEvery);
 
     workers.forEach((worker) => {

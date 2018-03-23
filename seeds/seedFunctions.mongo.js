@@ -79,8 +79,10 @@ const seedAllDescriptions = async (
   for (let j = 0; j < count / printEvery; j += 1) {
     for (let i = 0; i < printEvery / batchSize; i += 1) {
       await seedDescriptionBatch(
-        client, collection,
-        (startingValue + i + ((j * printEvery) / batchSize)), batchSize
+        client,
+        collection,
+        (startingValue + (i * batchSize) + ((j * printEvery))),
+        batchSize
       );
     }
     let inserted = (j + 1) * printEvery;
