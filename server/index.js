@@ -1,29 +1,38 @@
 require('newrelic');
 const express = require('express');
 const { MongoClient } = require('mongodb');
-const { getDescriptionById } = require('../database/models/descriptionModel.mongo');
 const cors = require('cors');
+const redis = require('redis');
+const bluebird = require('bluebird');
+const getData = require('./getData');
+const renderComponent = require('./renderComponent');
 
+bluebird.promisifyAll(redis.RedisClient.prototype);
+bluebird.promisifyAll(redis.Multi.prototype);
+const redisClient = redis.createClient();
 const app = express();
 const port = 3001;
 
+redisClient.on('error', (err) => {
+  console.log('Redis Error: ', err);
+});
 
 MongoClient.connect('mongodb://localhost/descriptions_n')
-  .then((client) => {
+  .then((mongoClient) => {
     app.use(cors());
-    app.use('/descriptions/:id', express.static(`${__dirname}/../client/dist`));
-    app.use(express.static(`${__dirname}/../client/dist`));
 
-    app.get('/amenities/:id/amenities/', (req, res) => {
+    app.use('/:id', async (req, res) => {
       const { id } = req.params;
+      let data = await getData(id, mongoClient, redisClient);
+      let html = renderComponent(data);
 
-      console.log('ahhh');
-      const db = client.db('descriptions_n');
-      const collection = db.collection('descriptions_n');
+      res.send(html);
+    });
 
-      getDescriptionById(collection, id)
-        .then(result => res.json(result))
-        .catch(e => console.log(e));
+    app.get('/descriptions/:id', async (req, res) => {
+      const { id } = req.params;
+      let data = await getData(id, mongoClient, redisClient);
+      res.json(data);
     });
 
     app.listen(port, () => {
