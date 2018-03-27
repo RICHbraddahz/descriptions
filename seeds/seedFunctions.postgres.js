@@ -1,5 +1,4 @@
 /* eslint-disable no-await-in-loop */
-const dateMath = require('date-arithmetic');
 const casual = require('casual');
 
 const capitalLetters = [...Array(26)].map((val, i) => String.fromCharCode(i + 65));
