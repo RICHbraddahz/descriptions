@@ -1,1 +1,4 @@
 client/
+artillery/
+
+newrelic.js
