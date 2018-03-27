@@ -1,0 +1,22 @@
+config:
+  target: 'http://127.0.0.1:3001'
+  phases:
+    - duration: 10
+      arrivalRate: 250
+      name: 'Ramp up'
+      rampTo: 1000
+    - duration: 5
+      arrivalRate: 1000
+      name: '5s 1k AR #1'
+    - duration: 5
+      arrivalRate: 1000
+      name: '5s 1k AR #2'
+  defaults:
+    headers:
+      x-my-service-auth: '987401838271002188298567'
+scenarios:
+  - flow:
+    - get:
+        name: "get {{ id }}"
+        url: "/descriptions/{{ id }}"
+processor: "./artilleryFunctions.js"
