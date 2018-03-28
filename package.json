@@ -10,6 +10,7 @@
   "scripts": {
     "test": "jest",
     "start": "webpack & node server/index.js ",
+    "start-dev": "webpack -d --watch & nodemon server/index.js ",
     "dev-react": "webpack -d --watch",
     "seed-mongodb": "node seeds/seeder.mongo.js",
     "seed-postgres": "node seeds/seeder.postgres.js",
@@ -33,6 +34,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-icons": "^2.2.7",
+    "redis": "^2.8.0",
     "webpack": "^3.11.0"
   },
   "devDependencies": {

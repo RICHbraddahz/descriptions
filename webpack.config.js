@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -6,7 +7,7 @@ const BUILD_DIR = path.resolve(__dirname, 'client/dist');
 const APP_DIR = path.resolve(__dirname, 'client/components');
 
 const config = {
-  entry: APP_DIR + '/index.jsx',
+  entry: `${APP_DIR}/index.jsx`,
   module: {
     rules: [
       {
@@ -25,7 +26,7 @@ const config = {
     ],
   },
   plugins: [
-    new ExtractTextPlugin({filename: 'bundle.css'}),
+    new ExtractTextPlugin({ filename: 'bundle.css' }),
   ],
   resolve: {
     extensions: ['*', '.js', '.jsx'],
@@ -33,6 +34,8 @@ const config = {
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js',
+    library: '',
+    libraryTarget: 'commonjs'
   },
 };
 
