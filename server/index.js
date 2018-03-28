@@ -4,8 +4,7 @@ const { MongoClient } = require('mongodb');
 const cors = require('cors');
 const redis = require('redis');
 const bluebird = require('bluebird');
-const getData = require('./getData');
-const renderComponent = require('./renderComponent');
+const getRenderedComponent = require('./renderComponent');
 
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
@@ -21,19 +20,18 @@ MongoClient.connect('mongodb://localhost/descriptions_n')
   .then((mongoClient) => {
     app.use(cors());
 
-    app.use('/:id', async (req, res) => {
+    app.get('/:id', async (req, res) => {
       const { id } = req.params;
-      let data = await getData(id, mongoClient, redisClient);
-      let html = renderComponent(data);
+      let html = getRenderedComponent(id, mongoClient, redisClient);
 
       res.send(html);
     });
 
-    app.get('/descriptions/:id', async (req, res) => {
-      const { id } = req.params;
-      let data = await getData(id, mongoClient, redisClient);
-      res.json(data);
-    });
+    // app.get('/descriptions/:id', async (req, res) => {
+    //   const { id } = req.params;
+    //   let data = await getData(id, mongoClient, redisClient);
+    //   res.json(data);
+    // });
 
     app.listen(port, () => {
       console.log(`listening on port ${port}`);
